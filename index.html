@@ -1,0 +1,841 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/theme/night.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+		
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<img src="images/key.gif" alt="press any key">
+					<h1 class="fragment fade-up">Dom Events</h1>
+					<div class="fragment fade-up"><span class="contacts">Author: Yana Bashtyk</span></div>
+					<aside class="notes">
+						<ul>
+							<li>Any webpage would be boring and useless without user interactions</li>
+							<li>That's the case when events come into play</li>
+							<li>We are going to look at the events and how to use them</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+						<h2>An <span class="imp-word">Event</span> is a signal that something has happened.</h2>
+						<p class="fragment fade-up">User actions (trigges)</p>
+						<div class="fragment visible actions">
+							<svg viewBox="-87 0 447 447.592">
+								<g>
+									<path d="m272.296875 135.59375c-.121094-71.925781-56.203125-131.335938-128-135.59375v32.726562c14.085937 
+									3.636719 23.945313 16.316407 24 30.867188v48c-.054687 14.546875-9.914063 27.226562-24 30.863281v33.136719h128zm0 0" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m272.296875 191.59375h-272v120c0 75.109375 60.886719 136 136 136 75.109375 0 136-60.890625 136-136zm0 0" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m.296875 175.59375h128v-33.136719c-14.085937-3.636719-23.945313-16.316406-24-30.863281v-48c.054687-14.550781 
+									9.914063-27.230469 24-30.867188v-32.726562c-71.800781 4.257812-127.882813 63.667969-128 135.59375zm0 0" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m120.296875 63.59375v48c0 8.835938 7.164063 16 16 16s16-7.164062 16-16v-48c0-8.839844-7.164063-16-16-16s-16 
+									7.160156-16 16zm0 0" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+								</g> 
+							</svg>						
+							<svg viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+								<g>
+									<path d="M512,50c0-16.542-13.458-30-30-30H30C13.458,20,0,33.458,0,50v219c0,0.049,0.007,0.096,0.007,0.145    
+									C0.006,269.242,0,269.338,0,269.435v70.456c0,20.641,3.131,41.091,9.307,60.783l11.32,36.098V482c0,5.522,4.478,10,10,10    
+									c5.522,0,10-4.478,10-10v-46.76c0-1.015-0.154-2.023-0.458-2.992l-11.778-37.559C22.823,376.936,20,358.499,20,339.891v-70.456    
+									c0-5.557,4.521-10.077,10.077-10.077c5.556,0,10.077,4.521,10.077,10.077v24.506c0,5.522,4.478,10,10,10c5.522,0,10-4.478,10-10    
+									V254.64c0-5.557,4.521-10.077,10.078-10.077s10.077,4.521,10.077,10.077v39.301c0,5.522,4.478,10,10,10c5.522,0,10-4.478,10-10    
+									v-52.018c0-5.557,4.521-10.077,10.077-10.077c5.556,0,10.077,4.521,10.077,10.077v52.018c0,5.522,4.478,10,10,10    
+									c5.522,0,10-4.478,10-10V176.262c0-5.557,4.521-10.077,10.077-10.077c5.556,0,10.078,4.521,10.078,10.077v145.385    
+									c0,4.579,3.11,8.573,7.55,9.695c4.436,1.12,9.073-0.914,11.249-4.943l23.578-43.662c2.896-5.36,9.422-7.411,14.861-4.667    
+									c4.654,2.349,7.052,7.527,5.829,12.595L208.4,354.026c-3.003,12.446-8.355,23.998-15.91,34.335l-29.945,40.979    
+									c-1.251,1.713-1.926,3.779-1.926,5.9V482c0,5.522,4.478,10,10,10c5.522,0,10-4.478,10-10v-43.495l28.019-38.343    
+									c9.119-12.478,15.581-26.422,19.204-41.445L236.7,322h38.6l8.857,36.716c3.624,15.024,10.086,28.969,19.204,41.446l28.02,38.343    
+									V482c0,5.522,4.478,10,10,10c5.522,0,10-4.478,10-10v-46.76c0-2.121-0.675-4.188-1.926-5.9l-29.946-40.979    
+									c-7.554-10.337-12.906-21.889-15.909-34.336l-15.286-63.361c-1.223-5.067,1.175-10.246,5.828-12.594    
+									c5.437-2.743,11.967-0.693,14.862,4.666l23.578,43.662c2.176,4.03,6.82,6.063,11.249,4.943c4.439-1.122,7.55-5.116,7.55-9.695    
+									V176.262c0-5.557,4.521-10.077,10.078-10.077s10.077,4.521,10.077,10.077V293.94c0,5.522,4.478,10,10,10c5.522,0,10-4.478,10-10    
+									v-52.018c0-5.557,4.521-10.077,10.077-10.077c5.556,0,10.077,4.521,10.077,10.077v52.018c0,5.522,4.478,10,10,10    
+									c5.522,0,10-4.478,10-10v-39.3c0-5.557,4.521-10.077,10.077-10.077c5.556,0,10.078,4.521,10.078,10.077v39.301    
+									c0,5.522,4.478,10,10,10c5.522,0,10-4.478,10-10v-24.506c0-5.557,4.521-10.077,10.077-10.077c5.556,0,10.078,4.52,10.078,10.077    
+									v70.456c0,18.608-2.823,37.045-8.391,54.799l-11.778,37.559c-0.304,0.969-0.458,1.978-0.458,2.992V482c0,5.522,4.478,10,10,10    
+									c5.522,0,10-4.478,10-10v-45.229l11.32-36.098C508.869,380.981,512,360.53,512,339.89v-70.456c0-0.097-0.006-0.193-0.007-0.289    
+									c0-0.049,0.007-0.096,0.007-0.145V50z M268.872,295.355l1.603,6.645h-28.95l1.603-6.645c2.858-11.843-1.373-23.903-10.454-31.358    
+									h46.652C270.246,271.452,266.014,283.512,268.872,295.355z M491.999,241.099c-3.151-1.124-6.542-1.742-10.076-1.742    
+									c-4.563,0-8.892,1.021-12.77,2.847c-4.74-10.397-15.232-17.642-27.386-17.642c-4.891,0-9.51,1.173-13.596,3.252    
+									c-5.063-9.492-15.069-15.969-26.559-15.969c-3.533,0-6.926,0.612-10.077,1.736v-37.32c0-16.585-13.492-30.077-30.077-30.077    
+									c-16.585,0-30.078,13.492-30.078,30.077v105.821l-4.779-8.851c-4.544-8.413-12.296-13.904-20.911-15.734    
+									c0.409-1.091,0.643-2.267,0.643-3.501c0-5.522-4.478-10-10-10H227c-5.522,0-10,4.478-10,10c0,1.124,0.194,2.201,0.536,3.209    
+									c-12.703-1.992-25.67,4.051-32.138,16.026l-4.779,8.851v-105.82c0-16.585-13.493-30.077-30.078-30.077    
+									c-16.585,0-30.077,13.492-30.077,30.077v37.32c-3.151-1.124-6.544-1.736-10.077-1.736c-11.489,0-21.495,6.477-26.559,15.969    
+									c-4.086-2.079-8.705-3.252-13.596-3.252c-12.153,0-22.646,7.244-27.386,17.642c-3.878-1.826-8.206-2.847-12.77-2.847    
+									c-3.534,0-6.925,0.617-10.077,1.742V50c0-5.514,4.486-10,10-10h452c5.514,0,10,4.486,10,10V241.099z" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M107,132.003H64c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h43c5.522,0,10-4.478,10-10    
+									C117,136.481,112.522,132.003,107,132.003z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M207.261,132.003h-15.839c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h15.839c5.522,0,10-4.478,10-10    
+									S212.783,132.003,207.261,132.003z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M81.275,188H64c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h17.275c5.522,0,10-4.478,10-10    
+									C91.275,192.478,86.797,188,81.275,188z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M233.973,188h-18.615c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h18.615c5.522,0,10-4.478,10-10    
+									C243.973,192.478,239.495,188,233.973,188z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M98.552,76.005H64c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h34.552c5.522,0,10-4.478,10-10    
+									C108.552,80.483,104.074,76.005,98.552,76.005z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M207.261,76.005h-31.679c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h31.679c5.522,0,10-4.478,10-10    
+									C217.261,80.483,212.783,76.005,207.261,76.005z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M144.66,78.93c-1.86-1.86-4.431-2.92-7.07-2.92c-2.63,0-5.21,1.06-7.07,2.92c-1.859,1.86-2.93,4.44-2.93,7.07    
+									c0,2.64,1.07,5.21,2.93,7.08c1.86,1.859,4.44,2.92,7.07,2.92s5.21-1.061,7.07-2.92c1.859-1.87,2.93-4.44,2.93-7.08    
+									C147.59,83.37,146.52,80.79,144.66,78.93z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M269.999,132.003H243.5c-5.522,0-10,4.477-10,10c0,5.522,4.478,10,10,10h26.499c5.522,0,10-4.478,10-10    
+									C279.999,136.481,275.521,132.003,269.999,132.003z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M324.569,134.93c-1.859-1.86-4.439-2.93-7.069-2.93s-5.21,1.069-7.07,2.93c-1.86,1.861-2.93,4.44-2.93,7.07    
+									c0,2.64,1.069,5.21,2.93,7.069c1.86,1.87,4.44,2.931,7.07,2.931s5.21-1.061,7.069-2.931c1.86-1.859,2.931-4.439,2.931-7.069    
+									S326.43,136.79,324.569,134.93z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M448.345,132.003h-37.634c-5.523,0-10,4.477-10,10c0,5.522,4.478,10,10,10h37.634c5.522,0,10-4.478,10-10    
+									C458.345,136.481,453.867,132.003,448.345,132.003z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M305,188h-20.167c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10H305c5.522,0,10-4.478,10-10    
+									C315,192.478,310.522,188,305,188z" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M446.394,188h-18.615c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h18.615c5.522,0,10-4.478,10-10    
+									C456.394,192.478,451.916,188,446.394,188z" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M282.499,76.005H256c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h26.499c5.522,0,10-4.478,10-10    
+									C292.499,80.483,288.021,76.005,282.499,76.005z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M448.127,76.005h-33.103c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h33.103c5.522,0,10-4.478,10-10    
+									C458.127,80.483,453.649,76.005,448.127,76.005z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M363.5,76.005h-21.908c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10H363.5c5.522,0,10-4.478,10-10    
+									C373.5,80.483,369.022,76.005,363.5,76.005z" data-original="#000000" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+								</g>
+							</svg>
+							<svg viewBox="0 0 512 512">
+								<g>
+									<path d="m0 512h512c0-10.46875 0-497.488281 0-512h-512zm482-30h-452v-331h452zm-452-452h452v91h-452zm0 0" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m121 61h30v30h-30zm0 0" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m61 61h30v30h-30zm0 0" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m181 61h30v30h-30zm0 0" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m331 422v30h90v-91h-30v39.503906l-64.335938-65.050781-21.328124 21.09375 64.730468 65.453125zm0 0" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m181 452v-30h-39.066406l64.730468-65.453125-21.328124-21.09375-64.335938 65.050781v-39.503906h-30v91zm0 0" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m121 232.214844 64.394531 64.390625 21.210938-21.210938-64.390625-64.394531h38.785156v-30h-90v90h30zm0 0" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="m326.605469 296.605469 64.394531-64.390625v38.785156h30v-90h-90v30h38.785156l-64.390625 64.394531zm0 0" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+								</g> 
+							</svg>
+							<svg viewBox="0 0 316.658 316.658" style="enable-background:new 0 0 316.658 316.658;" xml:space="preserve" class="">
+								<g>
+									<path d="M257.591,183.075c-11.104-12.792-26.45-21.154-43.217-23.551l-38.492-6.036V86.313   
+									c0-15.952-12.979-28.93-28.931-28.93h-0.433c-15.952,0-28.931,12.978-28.931,28.93v107.881L77.794,177.14   
+									c-7.993-3.425-17.104-2.614-24.367,2.176c-7.262,4.788-11.597,12.841-11.597,21.539v0.363c0,7.361,3.155,14.389,8.656,19.28   
+									l67.102,59.669v28.989c0,4.143,3.357,7.5,7.5,7.5s7.5-3.357,7.5-7.5V276.8c0-2.142-0.916-4.182-2.517-5.604l-69.618-61.906   
+									c-2.303-2.048-3.623-4.989-3.623-8.071v-0.363c0-3.695,1.77-6.982,4.854-9.017c3.087-2.035,6.807-2.366,10.201-0.911l50.24,21.532   
+									c0.462,0.199,0.948,0.355,1.453,0.458c0.751,0.155,1.509,0.189,2.25,0.114c0.084-0.008,0.166-0.024,0.249-0.035   
+									c0.155-0.021,0.311-0.041,0.464-0.071c0.134-0.026,0.265-0.063,0.396-0.096c0.1-0.026,0.2-0.047,0.299-0.077   
+									c0.149-0.044,0.294-0.098,0.439-0.152c0.08-0.029,0.162-0.056,0.241-0.088c0.142-0.058,0.28-0.124,0.417-0.19   
+									c0.081-0.039,0.164-0.075,0.243-0.117c0.123-0.065,0.241-0.137,0.36-0.208c0.091-0.055,0.184-0.107,0.273-0.166   
+									c0.1-0.066,0.194-0.138,0.291-0.208c0.102-0.075,0.205-0.147,0.304-0.227c0.079-0.064,0.153-0.134,0.23-0.201   
+									c0.106-0.094,0.214-0.187,0.315-0.287c0.068-0.067,0.131-0.139,0.196-0.208c0.1-0.106,0.2-0.21,0.293-0.323   
+									c0.072-0.086,0.136-0.177,0.204-0.265c0.078-0.102,0.157-0.201,0.23-0.307c0.092-0.135,0.175-0.275,0.258-0.416   
+									c0.04-0.067,0.083-0.13,0.121-0.198c0.36-0.652,0.628-1.362,0.782-2.114c0.104-0.503,0.152-1.01,0.152-1.512V86.313   
+									c0-7.681,6.249-13.93,13.931-13.93h0.433c7.682,0,13.931,6.249,13.931,13.93v72.025c0,0.277,0.018,0.551,0.047,0.82   
+									c-0.396,3.933,2.339,7.535,6.291,8.154l44.88,7.037c0.036,0.006,0.071,0.011,0.107,0.017c27.148,3.857,47.621,27.444,47.621,54.866   
+									v0.766c0,12.69-3.097,25.349-8.956,36.606l-20.345,39.088c-1.913,3.675-0.484,8.203,3.189,10.115c1.106,0.576,2.29,0.85,3.457,0.85   
+									c2.707,0,5.322-1.472,6.658-4.039l20.345-39.088c6.969-13.388,10.651-28.44,10.651-43.532v-0.766   
+									C274.828,212.275,268.706,195.883,257.591,183.075z" data-original="#222220" class="active-path" 
+									data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M146.735,37.79c4.143,0,7.5-3.357,7.5-7.5V7.5c0-4.143-3.357-7.5-7.5-7.5s-7.5,3.357-7.5,7.5v22.79   
+									C139.235,34.433,142.593,37.79,146.735,37.79z" 
+									data-original="#222220" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M193.189,98.897c0,4.143,3.357,7.5,7.5,7.5h22.79c4.143,0,7.5-3.357,7.5-7.5s-3.357-7.5-7.5-7.5   
+									h-22.79C196.547,91.397,193.189,94.755,193.189,98.897z" 
+									data-original="#222220" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M194.744,56.468c1.919,0,3.839-0.732,5.304-2.196l16.115-16.115c2.929-2.93,2.929-7.678,0-10.607   
+									c-2.93-2.928-7.678-2.928-10.607,0L189.44,43.664c-2.929,2.93-2.929,7.678,0,10.607C190.905,55.735,192.825,56.468,194.744,56.468z" 
+									data-original="#222220" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M87.521,54.271c1.465,1.464,3.385,2.196,5.304,2.196s3.839-0.732,5.304-2.196   
+									c2.929-2.93,2.929-7.678,0-10.607L82.013,27.549c-2.93-2.928-7.678-2.928-10.607,
+									0c-2.929,2.93-2.929,7.678,0,10.607L87.521,54.271   
+									z" data-original="#222220" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M64.419,106.397h22.79c4.143,0,7.5-3.357,7.5-7.5s-3.357-7.5-7.5-7.5h-22.79   
+									c-4.143,0-7.5,3.357-7.5,7.5S60.276,106.397,64.419,106.397z" 
+									data-original="#222220" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+								</g>
+							</svg>
+							<svg viewBox="0 0 480.07 480.07" style="enable-background:new 0 0 480.07 480.07;" xml:space="preserve">
+								<g>
+									<path d="M184.034,328.032h-32v-32c0-4.418-3.582-8-8-8h-32c-4.418,0-8,3.582-8,8v32h-32c-4.418,0-8,3.582-8,8v32    
+									c0,4.418,3.582,8,8,8h32v32c0,4.418,3.582,8,8,8h32c4.418,0,8-3.582,8-8v-32h32c4.418,0,8-3.582,8-8v-32    
+									C192.034,331.614,188.452,328.032,184.034,328.032z M176.034,360.032h-32c-4.418,0-8,3.582-8,8v32h-16v-32c0-4.418-3.582-8-8-8    
+									h-32v-16h32c4.418,0,8-3.582,8-8v-32h16v32c0,4.418,3.582,8,8,8h32V360.032z" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M479.234,337.416c-6.136-55.128-57.912-106.704-113.088-112.584c-4.686-0.517-9.397-0.784-14.112-0.8h-88v-32h-16v-16    
+									c0-17.673-14.327-32-32-32h-40c-8.837,0-16-7.163-16-16s7.163-16,16-16h128c17.673,0,32-14.327,32-32s-14.327-32-32-32h-40    
+									c-8.837,0-16-7.163-16-16v-32h-16v32c0,17.673,14.327,32,32,32h40c8.837,0,16,7.163,16,16s-7.163,16-16,16h-128    
+									c-17.673,0-32,14.327-32,32s14.327,32,32,32h40c8.837,0,16,7.163,16,16v16h-16v32h-88c-4.72,0.011-9.437,0.278-14.128,0.8    
+									c-55.2,5.92-106.944,57.496-113.064,112.624C-7.195,407.69,43.225,471.142,113.46,479.179c28.6,3.273,57.468-3.191,81.942-18.346    
+									c10.537-6.898,22.581-11.154,35.112-12.408c6.19-0.489,12.407-0.511,18.6-0.064c12.729,1.231,24.967,5.536,35.664,12.544    
+									c60.135,37.164,139.012,18.543,176.176-41.593C476.076,394.843,482.516,365.993,479.234,337.416z M232.034,208.032h16v16h-16    
+									V208.032z M435.514,426.704c-36.169,40.456-96.148,49.138-142.304,20.6c-12.889-8.393-27.634-13.509-42.952-14.904    
+									c-3.376-0.245-6.784-0.368-10.224-0.368c-3.64,0-7.2,0.152-10.784,0.432c-15.085,1.445-29.597,6.511-42.304,14.768    
+									c-52.602,32.545-121.627,16.287-154.173-36.315c-13.249-21.414-18.895-46.668-16.027-71.685    
+									c5.264-47.376,51.456-93.392,98.88-98.488c4.12-0.461,8.262-0.698,12.408-0.712h224c4.145,0.003,8.287,0.224,12.408,0.664    
+									c47.416,5.096,93.6,51.112,98.88,98.488C467.094,371.001,456.959,402.899,435.514,426.704z" 
+									data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M352.034,272.032c-17.673,0-32,14.327-32,32c0,17.673,14.327,32,32,32c17.673,0,32-14.327,32-32    
+									C384.034,286.359,369.707,272.032,352.034,272.032z M352.034,320.032c-8.837,0-16-7.163-16-16s7.163-16,16-16s16,7.163,16,16    
+									S360.87,320.032,352.034,320.032z" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M352.034,368.032c-17.673,0-32,14.327-32,32c0,17.673,14.327,32,32,32c17.673,0,32-14.327,32-32    
+									C384.034,382.359,369.707,368.032,352.034,368.032z M352.034,416.032c-8.837,0-16-7.163-16-16s7.163-16,16-16s16,7.163,16,16    
+									S360.87,416.032,352.034,416.032z" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M296.034,320.032c-17.673,0-32,14.327-32,32c0,17.673,14.327,32,32,32c17.673,0,32-14.327,32-32    
+									C328.034,334.359,313.707,320.032,296.034,320.032z M296.034,368.032c-8.837,0-16-7.163-16-16s7.163-16,16-16s16,7.163,16,16    
+									S304.87,368.032,296.034,368.032z" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+									<path d="M408.034,320.032c-17.673,0-32,14.327-32,32c0,17.673,14.327,32,32,32c17.673,0,32-14.327,32-32    
+									C440.034,334.359,425.707,320.032,408.034,320.032z M408.034,368.032c-8.837,0-16-7.163-16-16s7.163-16,16-16s16,7.163,16,16    
+									S416.87,368.032,408.034,368.032z" data-original="#000000" class="active-path" data-old_color="#d29d4b" fill="#d29d4b"/>
+								</g>
+							</svg>
+						</div>
+						<p class="fragment fade-left scheme">When ______ happens, do ______</p>
+						<aside class="notes">
+							<ul>
+								<li>An event is a signal that defines something has just happened in the system
+									 in response to your request.
+								</li>
+								<li>This something we also call trigger. It could be: click, key press, window resize
+									touch, joystick press
+								</li>
+								<li>When event happens you can specify what reaction will be(what will be done)</li>
+							</ul>
+						</aside>
+				</section>	
+				<section>
+					<h2>Event Handling Models</h2>
+					<ul class="simple-text">
+						<li>Inline</li>
+						<li>Traditional</li>
+						<li>W3C model</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+						    <li>Each event has an event handler - block of code that 
+								will be run when event fires.
+							</li>
+							<li>There are several ways to assign a handler. Let’s see them, starting from the simplest one</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<section>
+						<h2>Inline event handler</h2>
+						<p>HTML with an attribute named <span class="on-event">on</span>&#60;<span class="on-event">event</span>&#62;.</p>
+						<aside class="notes">
+							<ul>
+								<li>Handler can be registered inline - using event handler HTML attributes, 
+									they usually have the next structure: onevent.
+									The attribute value - JS code</li>
+								<li>It's the earliest method of registering 
+									event handlers found on the Web.</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<div class="example num-1" onclick="document.querySelector('.inline-pic').classList.toggle('display');">
+							<span>Hello, guys!</span>
+							<img class="inline-pic display" src="images/hi.gif" alt="hello dog">
+						</div>
+						<pre>
+							<code data-trim data-noescape>
+							&lt;div class="example num-1" onclick="alert('Hey you there!')"&#62;
+							  &lt;span&gt;Hello, guys!&lt;/span&gt;
+							  &lt;img class="inline-pic display" src="images/hi.gif" alt="hello"&gt;
+							&#60;/div&#62;
+							</code>
+						</pre>
+						<aside class="notes">
+							<ul>
+								<li>You can insert JavaScript directly inside the attribute,
+									like in this example
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<script>
+							function random(number) {
+  								return Math.floor(Math.random()*(number+1));
+							}
+							function bgChange() {
+								let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+								let btn = document.querySelector('.num-2');
+								btn.style.backgroundColor = rndCol;
+							}
+						</script>
+						<div class="example num-2" onclick="bgChange()">
+							<span>Change me!</span>
+						</div>
+						<pre>
+							<code data-trim data-noescape>
+							&lt;script&gt;
+							  function random(number) {
+							   return Math.floor(Math.random()*(number+1));
+							  }
+							  function bgChange() {
+							   let rndCol = 'rgb(' + random(255) + ',' + random(255)
+							    + ',' + random(255) + ')';
+							   let btn = document.querySelector('.example');
+							   btn.style.backgroundColor = rndCol;
+							}
+							&lt;/script&gt;
+
+							&#60;div class="example num-2" onclick="bgChange()"&#62;
+							 &lt;span&gt;Change me!&lt;/span&gt;
+							&#60;/div&#62;
+							</code>
+						</pre>
+						<aside class="notes">
+							<ul>
+								<li>or create a separate function in script</li>
+							</ul>
+						</aside>
+					</section>	
+				</section>
+				<section>
+					<section>
+						<h2>Traditional event handler</h2>
+						<p>Assign a handler using a DOM property <span class="on-event">on</span>&#60;<span class="on-event">event</span>&#62;.</p>
+						<ul>
+							<li>.onfocus and .onblur</li>
+							<li>window.onkeypress, window.onkeydown,
+								window.onkeyup</li>
+							<li>.onmouseover, .onmouseout</li>
+							<li>...</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>
+									You can register handler - usage of DOM property onevent.
+									There are many different event handler properties available.
+								</li>
+								<li>
+									onfocus, onblur - code will run when element is focused/ unfcocused
+									(try pressing tab). Often used to display information about gow to fill form fields.
+								</li>
+								<li>keypress - refers to a general press(button down and then up),
+									keydown, keyup refer to just key down and key up parts
+								</li>
+								<li>
+									mouseover/out - the event is registered when mouse pointer is moved
+									so it hover the element
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<div class="example num-3">
+							<span>Change me!</span>
+						</div>
+						<script>
+							function random(number) {
+								return Math.floor(Math.random()*(number+1));
+							}
+							let exp = document.querySelector('.example.num-3');
+							exp.onclick = function() {
+								let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+								exp.style.backgroundColor = rndCol;
+							}
+						</script>
+						<pre>
+							<code data-trim data-noescape>
+							&#60;div class="example num-3"&#62;
+							 &lt;span&gt;Change me!&lt;/span&gt;
+							&#60;/div&#62;
+
+							&lt;script&gt;
+							  function random(number) {
+							   return Math.floor(Math.random()*(number+1));
+							  }
+							  let exp = document.querySelector('.example.num-3');
+							  exp.onclick = function() {
+								let rndCol = 'rgb(' + random(255) + ',' + random(255)
+								 + ',' + random(255) + ')';
+								 exp.style.backgroundColor = rndCol;
+							  }
+							&lt;/script&gt;
+							</code>
+						</pre>
+						<aside class="notes">
+							<ul>
+								<li>
+									Here is the example of using traditional event handler.
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<div class="example num-4">
+							<span>Change me!</span>
+						</div>
+						<script>
+							function random(number) {
+								return Math.floor(Math.random()*(number+1));
+							}
+							let sample = document.querySelector('.example.num-4');
+							sample.onclick = function() {
+								let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+								sample.style.backgroundColor = rndCol;
+								sample.onclick = function() {
+									sample.style.color = 'black';
+								}
+							}
+						</script>
+						<pre>
+						 	<code data-trim data-noescape>
+							...	
+							&lt;script&gt;
+							  function random(number) {
+							   return Math.floor(Math.random()*(number+1));
+							  }
+							  let sample = document.querySelector('.example.num-4');
+							  sample.onclick = function() {
+								let rndCol = 'rgb(' + random(255) + ',' + random(255)
+								 + ',' + random(255) + ')';
+								sample.style.backgroundColor = rndCol;
+								sample.onclick = function() {
+								sample.style.color = 'black';
+							  }
+							&lt;/script&gt;
+							</code>
+						</pre>
+						<aside class="notes">
+							<ul>
+								<li>
+									We can also to rewrite our handler by creating another function
+									using the same property, so that it won't change the background
+									color but for example make text color black.
+								</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>W3C event handler</h2>
+						<p>
+							Use of special methods <span class="on-event">addEventListener</span> and <span class="on-event">removeEventListener</span>
+						</p>
+						<aside class="notes">
+							<ul>
+								<li>
+									The fundamental problem of the aforementioned ways to assign handlers – 
+									we can’t assign multiple handlers to one event.
+								</li>
+								<li>
+									Web-standard developers suggested an alternative way of managing
+									 handlers using special methods
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<p>element.addEventListener(<span class="on-event">event, handler[, phase]</span>)</p>
+						<ul>
+							<li>Name of the event (string)</li>
+							<li>Function (function)</li>
+							<li>The “phase” for the handler to work (boolean)</li>
+						</ul>
+						<p class="fragment fade-up">element.removeEventListener (<span class="on-event">event, handler[,&nbsp;phase]</span>)</p>
+						<aside class="notes">
+							<ul>
+								<li>
+									Listening for events can involve using the addEventListener function. 
+									This function takes three arguments.
+								</li>
+								<li>
+									Name - event you're interested in.
+								</li>
+								<li>
+									Handler itself - function thet will get called when event gets overheard
+									It also provides access to the underlying event object as part of its arguments.
+								</li>
+								<li>
+									Boolean that declares whether the callback should be fired in capture phase.
+								</li>
+								<li>
+									We also have remove listener to use it when we want to remove event listener 
+									once they are no longer needed.
+									Reference to the originally callback function.
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<div class="example num-5">
+							<span>Change me!</span>
+						</div>
+						<script>
+							function random(number) {
+								return Math.floor(Math.random()*(number+1));
+							}
+							let newExmp = document.querySelector('.num-5');
+							
+							function chnColor(event) {
+								let rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+								event.currentTarget.style.backgroundColor = rndCol;
+							}
+							function handler2() {
+    							alert('Enjoy new color!');
+							  };
+							newExmp.addEventListener('click', handler2);
+							newExmp.addEventListener('click', chnColor);
+						</script>
+						<pre>
+							<code data-trim data-noescape>
+							&#60;div class="example num-5"&#62;&lt;span&gt;Change me!&lt;/span&gt;&#60;/div&#62;
+							&lt;script&gt;
+							  function random(number) {
+							  return Math.floor(Math.random()*(number+1));
+							  }
+							  let newExmp = document.querySelector('.num-5');
+							  function chnColor(event) {
+								let rndCol = 'rgb(' + random(255) + ',' + random(255)
+								 + ',' + random(255) + ')';
+								event.currentTarget.style.backgroundColor = rndCol;
+							  }
+							  function handler2() { alert('Enjoy new color!');};
+							  newExmp.addEventListener('click', handler2);
+							  newExmp.addEventListener('click', chnColor);
+							&lt;/script&gt;
+							</code>
+						</pre>
+						<aside class="notes">
+							<ul>
+								<li>
+									Here is an example when I used multiple eventListeners
+									to one element. Alert message and changing bg-color.
+									Very convenient.
+								</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<h2>Event Object</h2>
+					<p>an argument passed to the handler.</p>
+					<ul>
+						<li class="fragment fade-left">type (string)</li>
+						<li class="fragment fade-left">target (node)</li>
+						<li class="fragment fade-left">currentTarget (node)</li>
+						<li class="fragment fade-left">preventDefault (function)</li>
+						<li class="fragment fade-left">stopPropagation (function)</li>						
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>
+								When an event happens, the browser creates an event object, 
+								puts details into it and passes it as an argument to the handler.
+							</li>
+							<li>
+								We can use this object to access a wealth of information about the event that has occurred
+							</li>
+							<li>
+								type - the name of the event.
+							</li>
+							<li>
+								target - DOM node where the event originated
+							</li>
+							<li>currentTarget - DOM node that event callback is firing on.</li>
+							<li>prevents default behaviour from occuring. 
+								for example, preventing a click event on an a element from loading a new page
+							</li>
+							<li>
+								stopPropagation - When this method gets called - your event stops his path and isn't allowed to continue 
+								forward either phase it involved in.
+							</li>
+						</ul>
+					</aside>	
+				</section>
+				<section>
+					<section>
+						<p>Mouse Events</p>
+						<ul class="list">
+							<li>click</li>
+							<li>dblclick</li>
+							<li>mouseover</li>
+							<li>mouseout</li>
+							<li>mousedown</li>
+							<li>mouseup</li>
+							<li>contextmenu</li>
+							<li>mousewheel</li>
+							<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent" target="_blank">...</a></li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>
+									Let's take a quick look at the most common events.
+								</li>
+								<li>
+									One of the most common ways people (and possibly cats) 
+									interact with their computers is by 
+									using a pointing device known as a mouse.
+								</li>
+								<li>
+									The name of these events should give you a good idea of what they do.
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<p>KeyBoard Events</p>
+						<ul class="list">
+							<li>keydown</li>
+							<li>keypress</li>
+							<li>keyup</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>
+									There are three events that you will need to familiarize yourself with
+								</li>
+								<li>
+									keyup, keydown - clearly fired when you press down on a 
+									key or release a key.
+								</li>
+								<li>
+									keypress - fired only when you press down on a key
+									that displys a char (letter, number)
+								</li>
+								<li>They have the following order: -down, -press, -up</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<p>Argument properties:</p>
+						<ul class="fragment fade-up list">
+							<li>keyCode</li>
+							<li>altKey, ctrlKey, shiftKey</li>
+							<li>metaKey</li>
+						</ul>
+						<pre class="fragment fade-up">
+							<code data-trim data-noescape>
+							window.addEventListener("keydown", checkKeyPressed, false);
+							function checkKeyPressed(e) {
+							
+							if (e.keyCode == "65") {
+							  alert("The 'a' key is pressed.");
+							 }
+							}
+							</code>
+						</pre>
+						<aside class="notes">
+							<ul>
+								<li>
+									When an event handler that reacts to a keyboard event is called, 
+									a Keyboard event argument is passed in
+								</li>
+								<li>
+									keycode - Every key you press on your keyboard has a number associated with it. 
+									This read-only property returns that number.
+								</li>
+								<li>
+									charcode - exists on event arguments returned by the keypress event, and it contains 
+									the ASCII code for whatever character key you pressed
+								</li>
+								<li>ctrl, alt, shift - return a true if these keys are pressed</li>
+								<li>
+									meta - The Meta key is the Windows key on Windows keyboards and the Command key on Apple keyboards.
+								</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Capturing and Bubbling</h2>
+						<img class="chart-pic" src="images/eventflow.svg" alt="event flow">
+						<aside class="notes">
+							<ul>
+								<li>
+									Events don't start at the thing you trigger the event on.
+								</li>
+								<li>
+									When you initiate the event - events always start at the root
+								</li>
+								<li>
+									and slowly make its way all the way down until it hits a destination which is the element you clicked on.
+									This phase called capturing.
+								</li>
+								<li>
+									After the event reaches the element it will make its way back to the root (origin) where it started.
+									This is bubbling.
+								</li>
+							</ul>
+						</aside>
+					</section>
+					<section>
+						<p>Third argument in addEvetnListener function specifies the phase</p>
+						<ul>
+							<li class="fragment fade-left"><span class="on-event">false</span> => bubbling phase(default)
+							<pre>
+								<code data-trim data-noescape>									
+								item.addEventListener("click", doSomething, false);
+								</code>
+							</pre>
+							</li>
+							<li class="fragment fade-left"><span class="on-event">true</span> => capturing phase
+							<pre>
+								<code data-trim data-noescape>									
+								item.addEventListener("click", doSomething, true);
+								</code>
+							</pre>
+							</li>
+						</ul>
+						<aside class="notes">
+							<ul>
+								<li>When you specify the event listener - as a third argument you specify the phase.</li>
+								<li>
+									If it’s false (default), then the handler is set on the bubbling phase.
+									If it’s true, then the handler is set on the capturing phase.
+								</li>
+								<li>
+									Well it's not very important if you are dealing with listening 
+									for the event on the element you're actually triggered an event on, 
+									but it's more important when dealing with intermediate elements on the path to your destination.
+								</li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section>
+					<p>Event Delegation</p>
+					<div class="navigation-dots-box">
+						<span id="carousel-1" class="dots">1</span>
+						<span id="carousel-2" class="dots">2</span>
+						<span id="carousel-3" class="dots">3</span>
+						<span id="carousel-4" class="dots">4</span>
+						<span id="carousel-5" class="dots">5</span>
+						<span id="carousel-6" class="dots">6</span>
+					</div>
+					<script>
+						let selected;
+						const dots = document.querySelector('.navigation-dots-box')
+						dots.onclick = function(event) {
+  							let target = event.target;
+							if (target.tagName != 'SPAN') return;
+							btnActive(target);
+						};
+						function btnActive(li) {
+    						if (selected) {
+    							selected.classList.remove('active');
+ 							}
+  							selected = li;
+  							selected.classList.add('active');
+  						}
+					</script>
+					<pre>
+						<code data-trim data-noescape>
+						...								
+						&lt;script&gt;
+						 let selected;
+						 const dots = document.querySelector('.navigation-dots-box')
+						 dots.onclick = function(event) {
+						   let target = event.target;
+						   if (target.tagName != 'SPAN') return;
+						   btnActive(target);
+						 };
+						 function btnActive(li) {
+						   if (selected) {
+						   selected.classList.remove('active')
+						 }
+						 selected = li;
+						 selected.classList.add('active');
+						 }
+						&lt;/script&gt;
+						</code>
+					</pre>
+					<aside class="notes">
+						<ul>
+							<li>
+								Capturing and bubbling allow us to implement one of most powerful event handling patterns called event delegation.
+							</li>
+							<li>
+								We listen for event on the parent element instead of listening to each child.
+							</li>
+							<li>
+								In the handler we get event.target, see where the event actually happened and handle it.
+							</li>
+							<li>
+								Instead of assign an onclick handler to each span tag that contain numbers
+								– we’ll setup the “catch-all” handler on div element.
+								It will use event.target to get the clicked element and highlight it.
+							</li>
+							<li>
+								Such a code doesn’t care how many cells there are in the table. 
+								We can add/remove child elements dynamically at any time and 
+								the highlighting will still work.
+							</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<h1>Thank you!</h1>
+					<img src="images/sheldon.gif" alt="Shedlon throws paper">
+					<aside class="notes">
+						<ul>
+							<li>Thank you for your attetion!</li>
+						</ul>
+					</aside>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

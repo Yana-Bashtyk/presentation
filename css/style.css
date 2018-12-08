@@ -1,0 +1,72 @@
+.reveal .slides .contacts {
+    padding-left: 50%;
+    
+    font-size: 0.7em;
+}
+
+.imp-word {
+    color: rgb(124, 185, 255);
+}
+
+.simple-text {
+    color: rgba(124, 185, 255, 0.747);
+}
+
+div svg {
+    width: 2.5em;
+}
+
+div.actions {
+    width: 670px;
+    margin: 60px auto;
+    
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+div.example {
+    color: rgb(62, 146, 243);
+    background: rgb(255, 249, 222);
+    padding: 1.2em !important;
+}
+
+.on-event {
+    color: rgb(253, 203, 93);
+}
+
+.example img.inline-pic {
+    position: absolute;
+
+    background: none;
+    border: none;
+    box-shadow: none;
+    width: 20%;
+}
+.example img.display {
+    display: none;
+}
+
+ul.list li {
+    font-size: 0.8em;
+}
+
+section img.chart-pic {
+    width: 50%;
+}
+
+span.dots {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+
+    color: rgb(62, 146, 243);
+    border-radius: 50%;
+    background-color: rgb(255, 249, 222);
+    border: none;
+}
+
+span.active {
+    background-color: #e7ad52;
+}
