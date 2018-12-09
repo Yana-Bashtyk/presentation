@@ -234,7 +234,7 @@
 								<li>An event is a signal that defines something has just happened in the system
 									 in response to your request.
 								</li>
-								<li>This something we also call trigger. It could be: click, key press, window resize
+								<li>This something we also call trigger. It could be: click, key press, window resize,
 									touch, joystick press
 								</li>
 								<li>When event happens you can specify what reaction will be(what will be done)</li>
@@ -253,7 +253,7 @@
 						    <li>Each event has an event handler - block of code that 
 								will be run when event fires.
 							</li>
-							<li>There are several ways to assign a handler. Let’s see them, starting from the simplest one</li>
+							<li>There are several ways to register a handler. Let’s see them, starting from the simplest one</li>
 						</ul>
 					</aside>
 				</section>
@@ -264,10 +264,13 @@
 						<aside class="notes">
 							<ul>
 								<li>Handler can be registered inline - using event handler HTML attributes, 
-									they usually have the next structure: onevent.
+									they have the next structure: onevent.
 									The attribute value - JS code</li>
 								<li>It's the earliest method of registering 
 									event handlers found on the Web.</li>
+								<li>But don't use it. First of all mixing JS and HTML code is not the best idea
+									And second issue that we can't assign more than one handler to the element.
+								</li>
 							</ul>
 						</aside>
 					</section>
@@ -346,15 +349,18 @@
 						<aside class="notes">
 							<ul>
 								<li>
-									You can register handler - usage of DOM property onevent.
+									You can register handler using DOM property onevent.
 									There are many different event handler properties available.
 								</li>
 								<li>
 									onfocus, onblur - code will run when element is focused/ unfcocused
-									(try pressing tab). Often used to display information about gow to fill form fields.
+									(try pressing tab). Often used to display information about how to fill form fields.
 								</li>
-								<li>keypress - refers to a general press(button down and then up),
-									keydown, keyup refer to just key down and key up parts
+								<li>
+									keyup, keydown - event is fired when you press down on a 
+                                    key or release a key.
+									keypress - a general press fired only when you press down on a key
+                                    that displys a char (letter, number)
 								</li>
 								<li>
 									mouseover/out - the event is registered when mouse pointer is moved
@@ -442,8 +448,9 @@
 						<aside class="notes">
 							<ul>
 								<li>
-									We can also to rewrite our handler by creating another function
-									using the same property, so that it won't change the background
+									If we want to change the function the event is listened to 
+									we actually will rewrite our first function, 
+									so that it won't change the background
 									color but for example make text color black.
 								</li>
 							</ul>
@@ -480,23 +487,22 @@
 						<aside class="notes">
 							<ul>
 								<li>
-									Listening for events can involve using the addEventListener function. 
-									This function takes three arguments.
+									addEventListener function takes three arguments.
 								</li>
 								<li>
 									Name - event you're interested in.
 								</li>
 								<li>
-									Handler itself - function thet will get called when event gets overheard
-									It also provides access to the underlying event object as part of its arguments.
+									Handler itself - function thet will get called when event happens
+									It also provides access to the event object as part of its arguments.
 								</li>
 								<li>
 									Boolean that declares whether the callback should be fired in capture phase.
 								</li>
 								<li>
-									We also have remove listener to use it when we want to remove event listener 
-									once they are no longer needed.
-									Reference to the originally callback function.
+									We also have remove function to use it when we want to remove event listeners 
+									once they are no longer needed. 
+									Reference to the originally callback function!
 								</li>
 							</ul>
 						</aside>
@@ -568,7 +574,7 @@
 								puts details into it and passes it as an argument to the handler.
 							</li>
 							<li>
-								We can use this object to access a wealth of information about the event that has occurred
+								We can use this object to access information about the event that has occurred
 							</li>
 							<li>
 								type - the name of the event.
@@ -576,110 +582,19 @@
 							<li>
 								target - DOM node where the event originated
 							</li>
-							<li>currentTarget - DOM node that event callback is firing on.</li>
-							<li>prevents default behaviour from occuring. 
+							<li>
+								currentTarget - DOM node that event function is firing on.
+							</li>
+							<li>
+								prevents default behaviour from occuring. 
 								for example, preventing a click event on an a element from loading a new page
 							</li>
 							<li>
-								stopPropagation - When this method gets called - your event stops his path and isn't allowed to continue 
+								stopPropagation - when this method gets called - your event stops his path and isn't allowed to continue 
 								forward either phase it involved in.
 							</li>
 						</ul>
 					</aside>	
-				</section>
-				<section>
-					<section>
-						<p>Mouse Events</p>
-						<ul class="list">
-							<li>click</li>
-							<li>dblclick</li>
-							<li>mouseover</li>
-							<li>mouseout</li>
-							<li>mousedown</li>
-							<li>mouseup</li>
-							<li>contextmenu</li>
-							<li>mousewheel</li>
-							<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent" target="_blank">...</a></li>
-						</ul>
-						<aside class="notes">
-							<ul>
-								<li>
-									Let's take a quick look at the most common events.
-								</li>
-								<li>
-									One of the most common ways people (and possibly cats) 
-									interact with their computers is by 
-									using a pointing device known as a mouse.
-								</li>
-								<li>
-									The name of these events should give you a good idea of what they do.
-								</li>
-							</ul>
-						</aside>
-					</section>
-					<section>
-						<p>KeyBoard Events</p>
-						<ul class="list">
-							<li>keydown</li>
-							<li>keypress</li>
-							<li>keyup</li>
-						</ul>
-						<aside class="notes">
-							<ul>
-								<li>
-									There are three events that you will need to familiarize yourself with
-								</li>
-								<li>
-									keyup, keydown - clearly fired when you press down on a 
-									key or release a key.
-								</li>
-								<li>
-									keypress - fired only when you press down on a key
-									that displys a char (letter, number)
-								</li>
-								<li>They have the following order: -down, -press, -up</li>
-							</ul>
-						</aside>
-					</section>
-					<section>
-						<p>Argument properties:</p>
-						<ul class="fragment fade-up list">
-							<li>keyCode</li>
-							<li>altKey, ctrlKey, shiftKey</li>
-							<li>metaKey</li>
-						</ul>
-						<pre class="fragment fade-up">
-							<code data-trim data-noescape>
-							window.addEventListener("keydown", checkKeyPressed, false);
-							function checkKeyPressed(e) {
-							
-							if (e.keyCode == "65") {
-							  alert("The 'a' key is pressed.");
-							 }
-							}
-							</code>
-						</pre>
-						<aside class="notes">
-							<ul>
-								<li>
-									When an event handler that reacts to a keyboard event is called, 
-									a Keyboard event argument is passed in
-								</li>
-								<li>
-									keycode - Every key you press on your keyboard has a number associated with it. 
-									This read-only property returns that number.
-								</li>
-								<li>
-									charcode - exists on event arguments returned by the keypress event, and it contains 
-									the ASCII code for whatever character key you pressed
-								</li>
-								<li>ctrl, alt, shift - return a true if these keys are pressed</li>
-								<li>
-									meta - The Meta key is the Windows key on Windows keyboards and the Command key on Apple keyboards.
-								</li>
-							</ul>
-						</aside>
-					</section>
 				</section>
 				<section>
 					<section>
@@ -688,14 +603,15 @@
 						<aside class="notes">
 							<ul>
 								<li>
-									Events don't start at the thing you trigger the event on.
+									Events don't start at the element you trigger the event on.
 								</li>
 								<li>
-									When you initiate the event - events always start at the root
+									When you initiate the event - it always starts at the root
 								</li>
 								<li>
-									and slowly make its way all the way down until it hits a destination which is the element you clicked on.
-									This phase called capturing.
+									and slowly make its way all the way down until it 
+									reaches a destination which is the element you clicked on.
+									This phase is called capturing.
 								</li>
 								<li>
 									After the event reaches the element it will make its way back to the root (origin) where it started.
@@ -797,14 +713,14 @@
 								In the handler we get event.target, see where the event actually happened and handle it.
 							</li>
 							<li>
-								Instead of assign an onclick handler to each span tag that contain numbers
-								– we’ll setup the “catch-all” handler on div element.
+								Instead of assign an onclick handler to each child tag that contain numbers
+								– we’ll do it on parent element.
 								It will use event.target to get the clicked element and highlight it.
 							</li>
 							<li>
-								Such a code doesn’t care how many cells there are in the table. 
+								Such a code doesn’t care how many children there are. 
 								We can add/remove child elements dynamically at any time and 
-								the highlighting will still work.
+								the highlighting (code) will still work.
 							</li>
 						</ul>
 					</aside>
